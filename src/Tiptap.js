@@ -12,7 +12,6 @@ import BulletList from '@tiptap/extension-bullet-list';
 import ListItem from '@tiptap/extension-list-item';
 import OrderedList from '@tiptap/extension-ordered-list';
 import History from '@tiptap/extension-history';
-import CustomParagraph from './customParagraph';
 import Color from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
 import { mergeAttributes } from "@tiptap/core";
