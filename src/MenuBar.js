@@ -63,6 +63,7 @@ const MenuBar = ({ editor }) => {
       </button>
       <button onClick={() => editor.chain().focus().undo().run()}>undo</button>
       <button onClick={() => editor.chain().focus().redo().run()}>redo</button>
+      <button onClick={() => editor.commands.setContent(localStorage.getItem('editor'))}>save</button>
     </>
   );
 };

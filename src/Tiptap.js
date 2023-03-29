@@ -61,9 +61,8 @@ const Tiptap = () => {
     ],
     content: '<p>Hello World!</p>',
     onUpdate({ editor }) {
-
-      localStorage.setItem("editor",editor.getHTML());
-      setEditorContent(localStorage.getItem("editor"));
+      localStorage.setItem('editor', editor.getHTML());
+      setEditorContent(localStorage.getItem('editor'));
       setEditorContentJson(editor.getJSON());
     },
     autofocus: false,
