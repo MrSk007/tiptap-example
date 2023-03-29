@@ -22,7 +22,7 @@ const CustomParagraph = Paragraph.extend({
     return {
       ...this.parent?.(),
       color: {
-        default: '#d71b1b',
+        default: null,
         // Customize the HTML parsing (for example, to load the initial content)
         parseHTML: (element) => element.getAttribute('data-color'),
         // … and customize the HTML rendering.
@@ -65,14 +65,21 @@ const Tiptap = () => {
       setEditorContent(localStorage.getItem('editor'));
       setEditorContentJson(editor.getJSON());
     },
-    autofocus: false,
+    autofocus: true,
   });
 
   return (
     <div>
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
-      <div className="outputHTML">{editorContent}</div>
+      <textarea
+      style={{"width": "100%","margin":"10px 0"}}
+        name=""
+        id="codeView"
+        value={editorContent}
+        cols="30"
+        rows="10"
+      ></textarea>
     </div>
   );
 };

@@ -27,7 +27,7 @@ const MenuBar = ({ editor }) => {
       <button onClick={() => editor.chain().focus().redo().run()}>redo</button>
       <button
         onClick={() =>
-          editor.commands.setContent(localStorage.getItem('editor'))
+          editor.commands.setContent(document.getElementById("codeView").textContent)
         }
       >
         save
