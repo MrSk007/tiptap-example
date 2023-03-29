@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import MenuBar from './MenuBar';
-import Bold from '@tiptap/extension-bold'
-import Document from '@tiptap/extension-document'
-import Paragraph from '@tiptap/extension-paragraph'
-import Text from '@tiptap/extension-text'
-import Italic from '@tiptap/extension-italic'
-import Heading from '@tiptap/extension-heading'
-import CodeBlock from '@tiptap/extension-code-block'
-import BulletList from '@tiptap/extension-bullet-list'
-import ListItem from '@tiptap/extension-list-item'
-import OrderedList from '@tiptap/extension-ordered-list'
-import History from '@tiptap/extension-history'
-import CustomParagraph from './customParagraph'
-import Color from "@tiptap/extension-color"
-import TextStyle from "@tiptap/extension-text-style"
-const limit = 280
+import Bold from '@tiptap/extension-bold';
+import Document from '@tiptap/extension-document';
+import Paragraph from '@tiptap/extension-paragraph';
+import Text from '@tiptap/extension-text';
+import Italic from '@tiptap/extension-italic';
+import Heading from '@tiptap/extension-heading';
+import CodeBlock from '@tiptap/extension-code-block';
+import BulletList from '@tiptap/extension-bullet-list';
+import ListItem from '@tiptap/extension-list-item';
+import OrderedList from '@tiptap/extension-ordered-list';
+import History from '@tiptap/extension-history';
+import CustomParagraph from './customParagraph';
+import Color from '@tiptap/extension-color';
+import TextStyle from '@tiptap/extension-text-style';
+const limit = 280;
 
 const CustomParagraph = Paragraph.extend({
   addAttributes() {
@@ -43,12 +43,12 @@ const Tiptap = () => {
 
   const editor = useEditor({
     extensions: [
-      Document, 
+      Document,
       TextStyle,
       Color,
-      CustomParagraph, 
-      Text, 
-      Bold, 
+      CustomParagraph,
+      Text,
+      Bold,
       Italic,
       Heading.configure({
         levels: [2, 3],
@@ -57,14 +57,14 @@ const Tiptap = () => {
       BulletList,
       OrderedList,
       ListItem,
-      History
+      History,
     ],
     content: '<p>Hello World!</p>',
     onUpdate({ editor }) {
       setEditorContent(editor.getHTML());
       setEditorContentJson(editor.getJSON());
     },
-    autofocus: false
+    autofocus: false,
   });
 
   return (
@@ -72,7 +72,6 @@ const Tiptap = () => {
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
       <div className="outputHTML">{editorContent}</div>
-      <div className="outputJSON">{JSON.stringify(editorContentJson)}</div>
     </div>
   );
 };
