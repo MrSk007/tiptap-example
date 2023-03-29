@@ -22,7 +22,7 @@ const CustomParagraph = Paragraph.extend({
     return {
       ...this.parent?.(),
       color: {
-        default: null,
+        default: '#d71b1b',
         // Customize the HTML parsing (for example, to load the initial content)
         parseHTML: (element) => element.getAttribute('data-color'),
         // … and customize the HTML rendering.
