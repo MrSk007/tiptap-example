@@ -7,6 +7,18 @@ const MenuBar = ({ editor }) => {
 
   return (
     <>
+          <button
+        onClick={() => editor.chain().focus().setColor('#94FADB').run()}
+        className={editor.isActive('textStyle', { color: '#94FADB' }) ? 'is-active' : ''}
+      >
+        teal
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setColor('#B9F18D').run()}
+        className={editor.isActive('textStyle', { color: '#B9F18D' }) ? 'is-active' : ''}
+      >
+        green
+      </button>
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={editor.isActive('bold') ? 'is-active' : ''}

@@ -12,8 +12,30 @@ import BulletList from '@tiptap/extension-bullet-list'
 import ListItem from '@tiptap/extension-list-item'
 import OrderedList from '@tiptap/extension-ordered-list'
 import History from '@tiptap/extension-history'
-
+import CustomParagraph from './customParagraph'
+import Color from "@tiptap/extension-color"
+import TextStyle from "@tiptap/extension-text-style"
 const limit = 280
+
+const CustomParagraph = Paragraph.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      color: {
+        default: null,
+        // Customize the HTML parsing (for example, to load the initial content)
+        parseHTML: (element) => element.getAttribute('data-color'),
+        // … and customize the HTML rendering.
+        renderHTML: (attributes) => {
+          return {
+            'data-color': attributes.color,
+            style: `color: ${attributes.color}`,
+          };
+        },
+      },
+    };
+  },
+});
 
 const Tiptap = () => {
   const [editorContent, setEditorContent] = useState('');
@@ -22,7 +44,9 @@ const Tiptap = () => {
   const editor = useEditor({
     extensions: [
       Document, 
-      Paragraph, 
+      TextStyle,
+      Color,
+      CustomParagraph, 
       Text, 
       Bold, 
       Italic,
