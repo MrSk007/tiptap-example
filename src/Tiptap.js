@@ -79,7 +79,7 @@ const Tiptap = () => {
       ListItem,
       History,
     ],
-    content: '<p>Hello <span style="color: #94FADB; color: red">not Work</span></p>',
+    content: '<p>Hello <span style="color: red">not Work</span></p>',
     onUpdate({ editor }) {
       localStorage.setItem('editor', editor.getHTML());
       setEditorContent(localStorage.getItem('editor'));
