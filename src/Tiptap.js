@@ -15,27 +15,47 @@ import History from '@tiptap/extension-history';
 import CustomParagraph from './customParagraph';
 import Color from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
+import { mergeAttributes } from "@tiptap/core";
 const limit = 280;
 
-const CustomParagraph = Paragraph.extend({
+const CustomTextStyle = TextStyle.extend({
+  name: "textStyle",
+
+  addOptions() {
+    return {
+      HTMLAttributes: {},
+    };
+  },
+
   addAttributes() {
     return {
       ...this.parent?.(),
-      color: {
+      style: {
         default: null,
-        // Customize the HTML parsing (for example, to load the initial content)
-        parseHTML: (element) => element.getAttribute('data-color'),
-        // … and customize the HTML rendering.
-        renderHTML: (attributes) => {
-          return {
-            'data-color': attributes.color,
-            style: `color: ${attributes.color}`,
-          };
-        },
       },
     };
   },
+
+  parseHTML() {
+    return [
+      {
+        tag: "span",
+        getAttrs: (dom) => {
+          const element = dom;
+
+          return {
+            style: element.getAttribute("style"),
+          };
+        },
+      },
+    ];
+  },
+
+  renderHTML({ HTMLAttributes }) {
+    return ["span", mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+  },
 });
+
 
 const Tiptap = () => {
   const [editorContent, setEditorContent] = useState('');
@@ -44,9 +64,9 @@ const Tiptap = () => {
   const editor = useEditor({
     extensions: [
       Document,
-      TextStyle,
+      CustomTextStyle,
       Color,
-      CustomParagraph,
+      Paragraph,
       Text,
       Bold,
       Italic,
@@ -59,7 +79,7 @@ const Tiptap = () => {
       ListItem,
       History,
     ],
-    content: '<p>Hello World!</p>',
+    content: '<p>Hello <span style="color: #94FADB; color: red">not Work</span></p>',
     onUpdate({ editor }) {
       localStorage.setItem('editor', editor.getHTML());
       setEditorContent(localStorage.getItem('editor'));
